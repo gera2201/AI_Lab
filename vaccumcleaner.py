@@ -1,51 +1,47 @@
-def clean(agent_location,location_status):
-    if agent_location=="A" and location_status[0]==0:
-        print("Position A is clean")
-        agent_location="B"
-        print("Moving agent to location B")
-        return
-    if agent_location=="A" and location_status[0]==1:
-        print("Position A is dirty, Cleaning")
-        location_status[0]=0
-        print("Position A cleaned")
-        agent_location="B"
-        print("Moving agent to location B")
-        return
-    if agent_location=="B" and location_status[1]==0:
-        print("Position B is clean")
-        agent_location="A"
-        print("Moving agent to location A")
-        return
-    if agent_location=="B" and location_status[1]==1:
-        print("Position B is dirty, Cleaning")
-        location_status[0]=0
-        print("Position B cleaned")
-        agent_location="A"
-        print("Moving agent to location A")
-        return
+def agent_clean(agent_pos,clean_status):
+  if agent_pos=="A" and clean_status[0]==0:
+    # agent_pos="B"
+    print("A is clean")
+    print("Moving agent to position B")
+    return "B"
+  if agent_pos=="A" and clean_status[0]==1:
+    clean_status[0]=0
+    print("Cleaning position A")
+    # agent_pos="B"
+    print("Moving agent to position B")
+    return "B"
+  if agent_pos=="B" and clean_status[1]==0:
+    # agent_pos="A"
+    print("B is clean")
+    print("Moving agent to position A")
+    return "A"
+  if agent_pos=="B" and clean_status[1]==1:
+    clean_status[1]=0
+    print("Cleaning position B")
+    # agent_pos="A"
+    print("Moving agent to position A")
+    return "A"
 
 def main():
-    agent_location="A"
-    location_status=[0,0]
-    user_input=1
-    
-    while user_input==1 :
-        print("Enter Location A or B")
-        location=input()
-        status=[0,0]
-        if location=="A" :
-            print("Enter location status 0.clean 1.dirty")
-            status[0]=int(input())
-        elif location=="B" :
-            print("Enter location status 0.clean 1.dirty")
-            status[1]=int(input())
-        else :
-            print("Invalid Input")
-        print("Agent position "+location)
-        clean(location,status)
-        print("Do you want to continue 0.No 1.Yes")
-        user_input=int(input())
-    
+  agent_pos="A"
+  clean_status=[0,0]
+  userInput=1
+  while userInput==1:
+    print("Enter the location\nA or B")
+    loc=input()
+    print("Status of the above location\n0 for Clean or 1 for Dirty")
+    cln=input()
+    if loc=="A":
+      # print("Input loc"+loc)
+      clean_status[0]=int(cln)
+    elif loc=="B":
+      # print("Input loc"+loc)
+      clean_status[1]=int(cln)
+    while 1 in clean_status:
+      print("Agent position "+agent_pos)
+      agent_pos=agent_clean(agent_pos,clean_status)
+    print("All positions are clean")
+    print("Do you want to continue? 1 for yes")
+    userInput=int(input())
+
 main()
-
-
